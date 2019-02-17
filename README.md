@@ -22,18 +22,18 @@ by GitHub.
     git remote add -f rocksdb https://gitlab.com/barrel-db/Deps/rocksdb.git
     ````
 
-   2. Updte the project to last release X.X.X.erl
+  2. Updte the project to last release X.X.X.erl
 
-   ```shell
-    git fetch rocksdb X.X.X.erl
-    git subtree pull --prefix deps/rocksdb rocksdb X.X.X.erl --squash
-    ```
+  ```shell
+  git fetch rocksdb X.X.X.erl
+  git subtree pull --prefix deps/rocksdb rocksdb X.X.X.erl --squash
+  ```
 
-   3. push the change to origin
+  3. push the change to origin
 
-   ```shell
-    git push origin BRANCH
-   ``` 
+  ```shell
+  git push origin BRANCH
+  ``` 
 
 See the [atlassian doc](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree)
  for more informations.

@@ -14,6 +14,27 @@ every referenced commit, there must be at least one named branch or tag here
 that has the commit as an ancestor, or else the commit will be garbage collected
 by GitHub.
 
+**To update erlang-rocksdb**
+
+  1. add `rocksdb` as a remote : 
+
+    ```shell
+    git remote add -f rocksdb https://gitlab.com/barrel-db/Deps/rocksdb.git
+    ````
+
+   2. Updte the project to last release X.X.X.erl
+
+   ```shell
+    git fetch rocksdb X.X.X.erl
+    git subtree pull --prefix deps/rocksdb rocksdb X.X.X.erl --squash
+    ```
+
+   3. push the change to origin
+
+   ```shell
+    git push origin BRANCH
+   ``` 
+
 **To create a new release branch:**
 
   1. Follow step one above.

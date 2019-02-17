@@ -35,6 +35,16 @@ by GitHub.
     git push origin BRANCH
    ``` 
 
+See the [atlassian doc](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree)
+ for more informations.
+
+> note: to create the initial folder as a subtree we run the command line :
+>
+> ```shell
+> git subtree add --prefix deps/rocksdb rocksdb X.X.X.erl --squash
+> ```
+
+
 **To create a new release branch:**
 
   1. Follow step one above.

@@ -18,9 +18,9 @@ by GitHub/Gitlab.
 
   1. add `rocksdb` as a remote : 
 
-    ```shell
-    git remote add -f rocksdb https://gitlab.com/barrel-db/Deps/rocksdb.git
-    ````
+  ```shell
+  git remote add -f rocksdb https://gitlab.com/barrel-db/Deps/rocksdb.git
+  ```
 
   2. Updte the project to last release X.X.X.erl
 

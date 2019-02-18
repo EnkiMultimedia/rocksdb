@@ -8,13 +8,13 @@ as necessary, and to ensure that RocksDB subtree in
 [barrel-db/erlang-rocksdb][erlang-rocksdb] has a controlled remote to point
 at.
 
-It is critical that any commit in this repository that is referenced from
+⚠️ It is critical that any commit in this repository that is referenced from
 [barrel-db/erlang-rocksdb][erlang-rocksdb] remains available here in perpetuity. For
 every referenced commit, there must be at least one named branch or tag here
 that has the commit as an ancestor, or else the commit will be garbage collected
-by GitHub.
+by GitHub/Gitlab.
 
-**To update erlang-rocksdb**
+## To update erlang-rocksdb
 
   1. add `rocksdb` as a remote : 
 
@@ -45,7 +45,7 @@ See the [atlassian doc](https://www.atlassian.com/blog/git/alternatives-to-git-s
 > ```
 
 
-**To create a new release branch:**
+## To create a new release branch:
 
   1. Follow step one above.
 

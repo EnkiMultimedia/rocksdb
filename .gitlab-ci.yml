@@ -2,7 +2,7 @@ variables:
   DPKG_TOOLS: "git wget cmake make dh-make dpkg-dev"
   RPM_TOOLS: "git wget cmake make rpm-build rpmdevtools redhat-rpm-config which"
   MAKE_ARGS: "-j8"
-  CMAKE_ARGS: "-j8"
+  CMAKE_ARGS: "-j8 -DFAIL_ON_WARNINGS=FALSE"
   CTEST_ARGS: "-j8"
   CPACK_ARGS: ""
 

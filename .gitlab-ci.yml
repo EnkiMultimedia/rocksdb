@@ -1,0 +1,187 @@
+variables:
+  DPKG_TOOLS: "git wget cmake make dh-make dpkg-dev"
+  RPM_TOOLS: "git wget cmake make rpm-build rpmdevtools redhat-rpm-config which"
+  MAKE_ARGS: "-j8"
+  CMAKE_ARGS: "-j8"
+  CTEST_ARGS: "-j8"
+  CPACK_ARGS: ""
+
+stages:
+  - build
+
+job debian-latest:
+  image: debian:latest
+  stage: build
+  script:
+    - "apt-get -y update; apt-get -y upgrade"
+    - "apt-get -y install ${DPKG_TOOLS}"
+    - "apt-get -y install gcc g++ libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev  liblz4-dev libzstd-dev"
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G DEB ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - "build/*.deb"
+
+job debian-unstable:
+  image: debian:unstable
+  stage: build
+  script:
+    - "apt-get -y update; apt-get -y upgrade"
+    - "apt-get -y install ${DPKG_TOOLS}"
+    - "apt-get -y install gcc g++ libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev  liblz4-dev libzstd-dev"
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G DEB ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - "build/*.deb"
+
+job ubuntu-18.04:
+  image: ubuntu:18.04
+  stage: build
+  script:
+    - "apt-get -y update"
+    - "apt-get -y upgrade"
+    - "apt-get -y install ${DPKG_TOOLS}"
+    - "apt-get -y install gcc g++ libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev  liblz4-dev libzstd-dev"
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G DEB ${CPACK_ARGS}"
+    - "dpkg -i *.deb"
+  artifacts:
+    paths:
+      - "build/*.deb"
+
+job ubuntu-19.04:
+  image: ubuntu:19.04
+  stage: build
+  script:
+    - "apt-get -y update"
+    - "apt-get -y upgrade"
+    - "apt-get -y install ${DPKG_TOOLS}"
+    - "apt-get -y install gcc g++ libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev  liblz4-dev libzstd-dev"
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G DEB ${CPACK_ARGS}"
+    - "dpkg -i *.deb"
+  artifacts:
+    paths:
+      - "build/*.deb"
+
+job centos-7:
+  image: centos:7
+  stage: build
+  script:
+    - "yum update -y"
+    - "yum group install -y 'Development Tools'"
+    - "yum install -y ${RPM_TOOLS} gcc-c++"
+    - "git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.0 && ./configure && make && make install && cd .."
+    - "yum install -y snappy"
+    - "yum install -y zlib zlib-devel"
+    - "yum install -y bzip2 bzip2-devel"
+    - "yum install -y lz4-devel"
+    - "yum install -y libasan"
+    - "wget https://github.com/facebook/zstd/archive/v1.1.3.tar.gz && mv v1.1.3.tar.gz zstd-1.1.3.tar.gz && tar zxvf zstd-1.1.3.tar.gz && cd zstd-1.1.3 && make && make install && cd .."
+    - "mkdir build && cd build"
+    - "cmake .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G RPM ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - build/*.rpm
+
+job centos-8:
+  image: centos:8
+  stage: build
+  script:
+    - "yum update -y"
+    - "yum group install -y 'Development Tools'"
+    - "yum install -y ${RPM_TOOLS} gcc-c++"
+    - "git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.0 && ./configure && make && make install && cd .."
+    - "yum install -y snappy"
+    - "yum install -y zlib zlib-devel"
+    - "yum install -y bzip2 bzip2-devel"
+    - "yum install -y lz4-devel"
+    - "yum install -y libasan"
+    - "wget https://github.com/facebook/zstd/archive/v1.1.3.tar.gz && mv v1.1.3.tar.gz zstd-1.1.3.tar.gz && tar zxvf zstd-1.1.3.tar.gz && cd zstd-1.1.3 && make && make install && cd .."
+    - "mkdir build && cd build"
+    - "cmake .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G RPM ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - build/*.rpm
+
+job fedora-rawhide:
+  image: fedora:rawhide
+  stage: build
+  script:
+    - "yum update -y"
+    - "yum group install -y 'Development Tools'"
+    - "yum install -y git wget make which"
+    - "yum install -y ${RPM_TOOLS} gcc-c++"
+    - "git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.0 && ./configure && make && make install && cd .."
+    - "yum install -y snappy"
+    - "yum install -y zlib zlib-devel"
+    - "yum install -y bzip2 bzip2-devel"
+    - "yum install -y lz4-devel"
+    - "yum install -y libasan"
+    - "wget https://github.com/facebook/zstd/archive/v1.1.3.tar.gz && mv v1.1.3.tar.gz zstd-1.1.3.tar.gz && tar zxvf zstd-1.1.3.tar.gz && cd zstd-1.1.3 && make && make install && cd .."
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G RPM ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - build/*.rpm
+
+job fedora-latest:
+  image: fedora:latest
+  stage: build
+  script:
+    - "yum update -y"
+    - "yum group install -y 'Development Tools'"
+    - "yum install -y git wget make which"
+    - "yum install -y ${RPM_TOOLS} gcc-c++"
+    - "git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.0 && ./configure && make && make install && cd .."
+    - "yum install -y snappy"
+    - "yum install -y zlib zlib-devel"
+    - "yum install -y bzip2 bzip2-devel"
+    - "yum install -y lz4-devel"
+    - "yum install -y libasan"
+    - "wget https://github.com/facebook/zstd/archive/v1.1.3.tar.gz && mv v1.1.3.tar.gz zstd-1.1.3.tar.gz && tar zxvf zstd-1.1.3.tar.gz && cd zstd-1.1.3 && make && make install && cd .."
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G RPM ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - build/*.rpm
+
+job fedora-30:
+  image: fedora:30
+  stage: build
+  script:
+    - "yum update -y"
+    - "yum group install -y 'Development Tools'"
+    - "yum install -y git wget make which"
+    - "yum install -y ${RPM_TOOLS} gcc-c++"
+    - "git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.0 && ./configure && make && make install && cd .."
+    - "yum install -y snappy"
+    - "yum install -y zlib zlib-devel"
+    - "yum install -y bzip2 bzip2-devel"
+    - "yum install -y lz4-devel"
+    - "yum install -y libasan"
+    - "wget https://github.com/facebook/zstd/archive/v1.1.3.tar.gz && mv v1.1.3.tar.gz zstd-1.1.3.tar.gz && tar zxvf zstd-1.1.3.tar.gz && cd zstd-1.1.3 && make && make install && cd .."
+    - "mkdir build && cd build"
+    - "cmake -DFAIL_ON_WARNINGS=FALSE .."
+    - "cmake --build . -- ${CMAKE_ARGS}"
+    - "cpack -G RPM ${CPACK_ARGS}"
+  artifacts:
+    paths:
+      - build/*.rpm

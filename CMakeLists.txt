@@ -97,7 +97,7 @@ endif()
 
 include(CMakeDependentOption)
 
-if(MSVC)
+if(MSVC AND NOT WITHOUT_THIRDPARTY_INC)
   option(WITH_GFLAGS "build with GFlags" OFF)
   option(WITH_XPRESS "build with windows built in compression" OFF)
   include(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty.inc)

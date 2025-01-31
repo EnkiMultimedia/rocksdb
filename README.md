@@ -5,11 +5,11 @@ store for fast storage.
 
 It exists for two reasons: to provide a home for Erlang-specific patches,
 as necessary, and to ensure that RocksDB subtree in
-[barrel-db/erlang-rocksdb][erlang-rocksdb] has a controlled remote to point
+[EnkiMultimedia-db/erlang-rocksdb][erlang-rocksdb] has a controlled remote to point
 at.
 
 ⚠️ It is critical that any commit in this repository that is referenced from
-[barrel-db/erlang-rocksdb][erlang-rocksdb] remains available here in perpetuity. For
+[EnkiMultimedia/erlang-rocksdb][erlang-rocksdb] remains available here in perpetuity. For
 every referenced commit, there must be at least one named branch or tag here
 that has the commit as an ancestor, or else the commit will be garbage collected
 by GitHub/Gitlab.
@@ -19,7 +19,7 @@ by GitHub/Gitlab.
   1. add `rocksdb` as a remote : 
 
   ```shell
-  git remote add -f rocksdb https://gitlab.com/barrel-db/Deps/rocksdb.git
+  git remote add -f rocksdb https://github.com/EnkiMultimedia/rocksdb.git
   ```
 
   2. Updte the project to last release X.X.X.erl
@@ -65,9 +65,9 @@ See the [atlassian doc](https://www.atlassian.com/blog/git/alternatives-to-git-s
 
   4. Protect the branch from force-pushes in the repository settings. This is
      crucial in ensuring that we don't break commit references in
-     [barrel-db/erlang-rocksdb][erlang-rocksdbb]'s submodules.
+     [EnkiMultimedia/erlang-rocksdb][erlang-rocksdbb]'s submodules.
 
   5. Follow steps three through six above.
 
-[erlang-rocksdb]: https://github.com/barrel-db/erlang-rocksdb
+[erlang-rocksdb]: https://github.com/enki-multimedia/erlang-rocksdb
 [RocksDB]: https://github.com/facebook/rocksdb 

@@ -5,7 +5,7 @@ store for fast storage.
 
 It exists for two reasons: to provide a home for Erlang-specific patches,
 as necessary, and to ensure that RocksDB subtree in
-[EnkiMultimedia-db/erlang-rocksdb][erlang-rocksdb] has a controlled remote to point
+[EnkiMultimedia/erlang-rocksdb][erlang-rocksdb] has a controlled remote to point
 at.
 
 ⚠️ It is critical that any commit in this repository that is referenced from
@@ -69,5 +69,5 @@ See the [atlassian doc](https://www.atlassian.com/blog/git/alternatives-to-git-s
 
   5. Follow steps three through six above.
 
-[erlang-rocksdb]: https://github.com/enki-multimedia/erlang-rocksdb
+[erlang-rocksdb]: https://github.com/EnkiMultimedia/erlang-rocksdb
 [RocksDB]: https://github.com/facebook/rocksdb 
